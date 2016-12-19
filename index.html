@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<!--
+	作者：郑宇骁
+	时间：2016-12-13
+	描述：“meet”活动管理系统beta版
+-->
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<title>Meet</title>
+		<link rel="stylesheet" href="dashboard.css" />
+		<link rel="stylesheet" href="dist/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="dist/css/bootstrap-theme.min.css" />
+		<link rel="stylesheet" href="bootstrap-datetimepicker.min.css" />
+		<style>
+			.nav-custom{
+				height: 50px;
+			}
+			.form-custom{
+				margin-top: -8px;
+			}
+			.container-custom{
+				margin-top: +20px;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<!--弹出层 -->
+		<div id="new" class="modal fade">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4>新建活动</h4>
+					</div>
+					<div class="modal-body">
+						<div class="container-fluid">
+							<div class="row">
+								<form id="newactivity" action="#" class="form-horizontal">
+									<div class="form-group">
+											<div class="col-lg-11">
+												<input id="id" name="userid" class="form-control hidden" type="text">
+											</div>
+									</div>
+									<div class="form-group">
+											<label for="activity" class="control-label col-lg-1">活动名</label>
+											<div class="col-lg-11">
+												<input id="activity" name="activity" class="form-control" type="text" placeholder="不超过10个中文字符">
+											</div>
+									</div>
+									<div class="form-group">
+										<label for="author" class="control-label col-lg-1">发起人</label>
+										<div class="col-lg-11">
+											<input id="author" name="author" class="form-control" type="text" placeholder="请输入真实姓名">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="tel" class="control-label col-lg-1">手机</label>
+										<div class="col-lg-11">
+											<input id="tel" name="tel" class="form-control" type="text" placeholder="请输入11位手机号">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="people" class="control-label col-lg-1">参与人数</label>
+										<div class="col-lg-11">
+											<input id="people" name="people" class="form-control" type="number" placeholder="包括自己">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="activitydate" class="control-label col-lg-1">时间</label>
+										<div class="col-lg-11">
+											<div class="input-group">
+												<input id="activitydate" name="activitydate" class="form-control form_datetime" type="text" value="">
+												<span class="input-group-addon"><span class="glyphicon glyphicon-th"><i class="icon-th"></i></span></span>
+											</div>												
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="detail" class="control-label col-lg-1">详细信息</label>
+										<div class="col-lg-11">
+											<input id="detail"  name="detail" class="form-control" type="text" placeholder="不超过20个中文字符">
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-success" onclick="newact()">提交</button>
+						<button class="btn btn-danger" data-dismiss="modal" onclick="cleanform()">取消</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--
+        	作者：offline
+        	时间：2016-12-09
+        	描述：主页面
+        -->	
+		<div class="container">
+		<!--
+        	作者：offline
+        	时间：2016-12-09
+        	描述：导航条
+        -->
+			<nav id="nav" class="nav navbar-inverse navbar-fixed-top">
+				<div class="container">
+					<div class="navbar-header">
+						<a href="#" class="navbar-brand">Meet</a>
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#response">
+							<span class="sr-only">切换导航</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+					</div>
+				<div id="response" class="nav-collapse in" >
+					<ul class="nav navbar-nav navbar-right">
+						<form id="userlogin" class="navbar-form form-custom">
+							<div class="navbar-form">
+								<input id="username" name="username" type="text" class="form-control" placeholder="StudentID"/>
+								<input id="pwd" name="password" type="password" class="form-control" placeholder="password" />
+								<input type="button" id="loginbtn" class="btn btn-success navbar-btn" onclick="login()" value="Login"></input>
+								<input type="button" id="registbtn" class="btn btn-primary navbar-btn" onclick="regist()" value="Register"></input>
+							</div>
+						</form>
+					</ul>
+					<ul id="pills" class="nav navbar-nav hidden">
+						<li class=""><a id="add" data-toggle="modal" data-target="#new"><span class="glyphicon glyphicon-plus"></span>新建活动</a></li>
+						<li id="flow" class="active"><a onclick="loadflow()">活动流</a></li>
+						<li id="my" class=""><a onclick="loadmy()">我发起的</a></li>
+						<li id="other" class=""><a onclick="loadother()">我参加的</a></li>
+						<form id="searchform" class="navbar-form navbar-left">
+									<input name="searchcontent" type="text" id="searchcontent" class="form-control" placeholder="search" />
+									<input type="button" id="searchbtn" class="btn btn-primary" onclick="search()" value="搜索"></input>												
+						</form>
+					</ul>
+					<ul id="userinfo" class="nav pull-right hidden">
+						<p id="user" class="navbar-text text-center"></p>
+						<button id="logoutbtn" class="btn btn-danger navbar-btn" onclick="logout()">注销</button>
+					</ul>
+				</div>
+
+				</div>
+			</nav>
+			<!--
+            	作者：offline
+            	时间：2016-12-09
+            	描述：面板
+            -->
+            <div class="row container-custom">
+            	<div id="panel" class="col-lg-8 col-lg-offset-2">
+            	</div>
+            </div>   
+		</div>
+	
+
+	<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+	<script type="text/javascript" src="dist/js/bootstrap.min.js" ></script>
+	<script type="text/javascript" src="login&regist.js"></script>
+	<script type="text/javascript" src="new.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="index.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="bootstrap-datetimepicker.min.js" ></script>
+	<script type="text/javascript" src="bootstrap-datetimepicker-master/js/locales/bootstrap-datetimepicker.zh-CN.js" ></script>
+	<script type="text/javascript" src="template.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="addactivity.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="search.js" ></script>
+	<script type="text/javascript" charset="UTF-8">
+	    $(".form_datetime").datetimepicker({
+	        format: "yyyy-mm-dd",
+	        autoclose: true,
+	        language: "zh-CN",
+	        minView: "month",
+	        todayBtn: true,
+	        pickerPosition: "bottom-left"
+	    });
+	</script>  
+	<script type="text/html" id="artemplate1">
+		<div class="panel panel-default">
+	            		<div class="panel-heading">
+	            			<h3 id="{{flowactivityid}}-activity" class="panel-title">{{flowactivity}}</h3>
+	            		</div>
+	            		<div class="panel-body">
+	            			<div class="container-fluid">
+	            				<div class="row">
+	            					<div class="col-lg-5">
+	            						<table class="table-hover">
+											<tbody>
+												<tr>
+													<th>发起人</th>
+													<th id="{{flowactivityid}}-author" class="flowauthor">{{flowauthor}}</th>
+												</tr>
+												<tr>
+													<th>手机</th>
+													<th id="{{flowactivityid}}-tel" class="flowtel">{{flowtel}}</th>
+												</tr>
+												<tr>
+													<th>
+														时间
+													</th>
+													<th id="{{flowactivityid}}-date" class="flowdate">{{flowdate}}</th>
+												</tr>
+											</tbody>
+	            						</table>
+	            					</div>
+	            					<div class="col-lg-7">
+	            						<p id="{{flowactivityid}}-detail" class="flowdetail">{{flowdetail}}</p>
+	            						<p id="{{flowactivityid}}-id" class="hidden flowid">{{flowid}}</p>
+	            						
+	            					</div>
+	            				</div>            				            				
+	            			</div>	
+	            		</div>
+	            		<div class="panel-footer">
+	            			<div class="container-fluid">
+		            			<div class="row">
+		            				<div class="col-lg-5">
+		            					<h4 class="panel-title">参与人数</h4>
+            							<h3 id="{{flowactivityid}}-rate" style="color: #1ABC9C;">{{flowpeopleleft}}/{{flowpeople}}</h3>
+            							<label id="{{flowactivityid}}-people" class="hidden">{{flowpeople}}</label>
+            							<label id="{{flowactivityid}}-peopleleft" class="hidden">{{flowpeopleleft}}</label>
+            							
+		            				</div>
+		            				<div class="col-lg-5" style="padding-top: 30px;">
+		            					<div class="progress">
+		            						<div id="{{flowactivityid}}-bar" class="progress-bar-success" style="width: {{flowpeoplepercent}}%; transition: width 0.5s;">
+		            							{{flowpeoplepercent}}%
+		            						</div>
+		            					</div>
+		            					
+		            				</div>
+		            				<div class="col-lg-2">
+		            					<p class="hidden flowactivityid">{{flowactivityid}}</p>
+		            					<button id="{{flowactivityid}}" class="btn btn-primary btn-lg" style="margin-top: +20px;" onclick="addactivity()"><span></span>加入</button>
+		            				</div>
+	            				</div>
+	            			</div>	            			
+	            		</div>
+	            	</div>
+	</script>
+	
+	<script type="text/html" id="artemplate2">
+		<div class="panel-group">
+		<div class="panel panel-default">
+    		<div class="panel-heading">
+    			<h3 id="{{flowactivityid}}-activity" class="panel-title">{{flowactivity}}</h3>
+    		</div>
+    		<div class="panel-body">
+    			<div class="container-fluid">
+    				<div class="row">
+    					<div class="col-lg-5">
+    						<table class="table-hover">
+								<tbody>
+									<tr>
+										<th>发起人</th>
+										<th id="{{flowactivityid}}-author" class="flowauthor">{{flowauthor}}</th>
+									</tr>
+									<tr>
+										<th>手机</th>
+										<th id="{{flowactivityid}}-tel" class="flowtel">{{flowtel}}</th>
+									</tr>
+									<tr>
+										<th>
+											时间
+										</th>
+										<th id="{{flowactivityid}}-date" class="flowdate">{{flowdate}}</th>
+									</tr>
+								</tbody>
+    						</table>
+    					</div>
+    					<div class="col-lg-7">
+    						<p id="{{flowactivityid}}-detail" class="flowdetail">{{flowdetail}}</p>
+    						<p id="{{flowactivityid}}-id" class="hidden flowid">{{flowid}}</p>	
+    					</div>
+    				</div>            				            				
+    			</div>	
+    		</div>
+    		<div class="panel panel-default">
+    			<div class="panel-heading">
+    				<div class="container-fluid">
+    					
+	    				<div class="row">
+	    						<h3><a data-toggle="collapse" data-target="#{{flowactivityid}}-collaspe" class="panel-title" id="{{flowactivity}}-people">参与人     <span class="glyphicon glyphicon-list"></span></a></h3>
+	    				</div>
+    				</div>
+    			</div>
+    			<div id="{{flowactivityid}}-collaspe" class="collapse">
+    				<div  class="panel-body">
+    				<div class="container-fluid">
+    					<table class="table table-hover">
+    						<tbody id="{{flowactivityid}}-member">
+    						</tbody>
+    					</table>
+    				</div>
+    				</div>
+    			</div>
+    		</div>
+	    </div>
+	   </div>
+	</script>
+	<script type="text/html" id="artemplate3">
+		<tr>
+   			<th id="{{flowactivityid}}-{{count}}"></th>
+    	</tr>
+	</script>
+	</body>
+</html>
