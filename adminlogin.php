@@ -19,12 +19,12 @@ $pwd = $_POST["password"];
 //echo $user;
 //echo $pwd;
 $sel = mysqli_select_db($conn,$database);
-$sql = "SELECT * FROM users";
+$sql = "SELECT * FROM admin";
 $result = $conn->query($sql);
 if ($result->num_rows > 0){
 	while($row = $result->fetch_assoc()){
-		//echo $row["username"];
-		//echo $row["pwd"];
+//		echo $row["username"];
+//		echo $row["pwd"];
 		if ($row["username"] == $user){
 			if ($row["pwd"] == $pwd){
 				$row["pwd"] = "";

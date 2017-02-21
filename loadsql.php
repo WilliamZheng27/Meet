@@ -13,7 +13,6 @@ if ($conn->connect_error) {
 } 
 mysqli_query($conn,'set names utf8');
 //echo "Connected successfully";
-mysqli_query($conn,'set names utf8');
 $sel = mysqli_select_db($conn,$database);
 $sql = "SELECT * FROM flow";
 $result = $conn->query($sql);

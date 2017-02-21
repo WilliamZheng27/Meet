@@ -14,6 +14,7 @@
 		<link rel="stylesheet" href="dist/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="dist/css/bootstrap-theme.min.css" />
 		<link rel="stylesheet" href="bootstrap-datetimepicker.min.css" />
+		<link rel="stylesheet" href="bootstrap-select.min.css">
 		<style>
 			.nav-custom{
 				height: 50px;
@@ -28,7 +29,7 @@
 	</head>
 	<body>
 		
-		<!--弹出层 -->
+		<!--新活动弹出层 -->
 		<div id="new" class="modal fade">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
@@ -42,6 +43,8 @@
 									<div class="form-group">
 											<div class="col-lg-11">
 												<input id="id" name="userid" class="form-control hidden" type="text">
+												<input id="author" name="author" class="form-control hidden" type="text">
+												<input id="tel" name="tel" class="form-control hidden" type="text">
 											</div>
 									</div>
 									<div class="form-group">
@@ -51,25 +54,13 @@
 											</div>
 									</div>
 									<div class="form-group">
-										<label for="author" class="control-label col-lg-1">发起人</label>
-										<div class="col-lg-11">
-											<input id="author" name="author" class="form-control" type="text" placeholder="请输入真实姓名">
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="tel" class="control-label col-lg-1">手机</label>
-										<div class="col-lg-11">
-											<input id="tel" name="tel" class="form-control" type="text" placeholder="请输入11位手机号">
-										</div>
-									</div>
-									<div class="form-group">
 										<label for="people" class="control-label col-lg-1">参与人数</label>
 										<div class="col-lg-11">
 											<input id="people" name="people" class="form-control" type="number" placeholder="包括自己">
 										</div>
 									</div>
 									<div class="form-group">
-										<label for="activitydate" class="control-label col-lg-1">时间</label>
+										<label for="activitydate" class="control-label col-lg-1">日期</label>
 										<div class="col-lg-11">
 											<div class="input-group">
 												<input id="activitydate" name="activitydate" class="form-control form_datetime" type="text" value="">
@@ -77,6 +68,24 @@
 											</div>												
 										</div>
 									</div>
+									<div class="form-group">
+										<label for="activitytimestart" class="control-label col-lg-1">开始时间</label>
+										<div class="col-lg-11">
+											<div class="input-group">
+												<input id="activitytimestart" name="activitytimestart" class="form-control" type="text" value="">
+												<span class="input-group-addon"><span class="glyphicon glyphicon-th"><i class="icon-th"></i></span></span>
+											</div>												
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="activitytimeend" class="control-label col-lg-1">结束时间</label>
+										<div class="col-lg-11">
+											<div class="input-group">
+												<input id="activitytimeend" name="activitytimeend" class="form-control" type="text" value="">
+												<span class="input-group-addon"><span class="glyphicon glyphicon-th"><i class="icon-th"></i></span></span>
+											</div>												
+										</div>
+									</div>									
 									<div class="form-group">
 										<label for="detail" class="control-label col-lg-1">详细信息</label>
 										<div class="col-lg-11">
@@ -94,6 +103,212 @@
 				</div>
 			</div>
 		</div>
+		<!--
+        	作者：offline
+        	时间：2017-02-07
+        	描述：新课程弹出层
+        -->
+		<div id="newcourse" class="modal fade">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4>新建课程</h4>
+					</div>
+					<div class="modal-body">
+						<div class="container-fluid">
+							<div class="row">
+								<form id="newcourseform" action="#" class="form-horizontal">
+									<div class="form-group">
+											<div class="col-lg-11">
+												<input id="id-course" name="userid" class="form-control hidden" type="text">
+												<input id="author-course" name="author" class="form-control hidden" type="text">
+												<input id="tel-course" name="tel" class="form-control hidden" type="text">
+											</div>
+									</div>
+									<div class="form-group">
+											<label for="course" class="control-label col-lg-1">课程名</label>
+											<div class="col-lg-11">
+												<input id="course" name="activity" class="form-control" type="text" placeholder="不超过10个中文字符">
+											</div>
+									</div>
+									<div class="form-group">
+										<label for="people" class="control-label col-lg-1">参与人数</label>
+										<div class="col-lg-11">
+											<input id="coursepeople" name="people" class="form-control" type="number" placeholder="">
+										</div>
+									</div>
+									<div class="form-group hidden">
+										<label for="coursedate" class="control-label col-lg-1">日期</label>
+										<div class="col-lg-11">
+											<div class="input-group">
+												<input id="coursedate" name="activitydate" class="form-control form_datetime" type="text" value="2017-07-15">
+												<span class="input-group-addon"><span class="glyphicon glyphicon-th"><i class="icon-th"></i></span></span>
+											</div>												
+										</div>
+									</div>
+									<div class="form-group hidden">
+										<label for="coursetimestart" class="control-label col-lg-1">开始时间</label>
+										<div class="col-lg-11">
+											<div class="input-group">
+												<input id="coursetimestart" name="activitytimestart" class="form-control" type="text" value="18:00">
+												<span class="input-group-addon"><span class="glyphicon glyphicon-th"><i class="icon-th"></i></span></span>
+											</div>												
+										</div>
+									</div>
+									<div class="form-group hidden">
+										<label for="coursetimeend" class="control-label col-lg-1">结束时间</label>
+										<div class="col-lg-11">
+											<div class="input-group">
+												<input id="coursetimeend" name="activitytimeend" class="form-control" type="text" value="21:00">
+												<span class="input-group-addon"><span class="glyphicon glyphicon-th"><i class="icon-th"></i></span></span>
+											</div>												
+										</div>
+									</div>																		
+									<div class="form-group">
+										<label for="detail" class="control-label col-lg-1">详细信息</label>
+										<div class="col-lg-11">
+											<input id="coursedetail"  name="detail" class="form-control" type="text" placeholder="不超过200个中文字符">
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-success" onclick="newcourse()">提交</button>
+						<button class="btn btn-danger" data-dismiss="modal" onclick="cleanform()">取消</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--
+        	作者：offline
+        	时间：2016-12-19
+        	描述：注册弹出层
+        -->
+        <div id="modal-register" class="modal fade">
+        	<div class="modal-dialog modal-lg">
+        		<div class="modal-content">
+        			<div class="modal-header">
+        				<h4>完善注册信息</h4>
+        			</div>
+        			<div class="modal-body">
+        				<div class="container-fluid">
+							<div class="row">
+								<form id="modal-form-register" action="#" class="form-horizontal">
+									<div class="form-group">
+										<label for="modal-form-register-id" class="control-label col-lg-1">用户名</label>
+										<div class="col-lg-11">
+											<input id="modal-form-register-id" name="modal-form-register-id" class="form-control" type="text" placeholder="不超过10个中文字符">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="modal-form-register-pwd" class="control-label col-lg-1">密码</label>
+										<div class="col-lg-11">
+											<input id="modal-form-register-pwd" name="modal-form-register-pwd" class="form-control" type="text" placeholder="不超过10个中文字符">
+										</div>
+									</div>									
+									<div class="form-group">
+										<label for="modal-form-register-name" class="control-label col-lg-1">姓名</label>
+										<div class="col-lg-11">
+											<input id="modal-form-register-name" name="modal-form-register-name" class="form-control" type="text" placeholder="不超过10个中文字符">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="modal-form-register-tel" class="control-label col-lg-1">手机号码</label>
+										<div class="col-lg-11">
+											<input id="modal-form-register-tel" name="modal-form-register-tel" class="form-control" type="text" placeholder="请输入11位手机号">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="modal-form-register-sex" class="control-label col-lg-1">性别</label>
+										<div class="col-lg-11">
+											<select id="modal-form-register-sex" name="modal-form-register-sex" class="form-control selectpicker">
+												<option>男</option>
+												<option>女</option>
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="modal-form-register-type" class="control-label col-lg-1">用户类型</label>
+										<div class="col-lg-11">
+											<select id="modal-form-register-type" name="modal-form-register-type" class="form-control selectpicker">
+												<option>学生</option>
+												<option>讲师</option>
+											</select>
+										</div>
+									</div>									
+								</form>
+							</div>
+        				</div>
+        			</div>
+					<div class="modal-footer">
+						<button class="btn btn-success" onclick="regist()">注册</button>
+						<button class="btn btn-danger" data-dismiss="modal" onclick="cleanform()">取消</button>
+					</div>
+        		</div>
+        	</div>
+        </div>
+        
+        <!--
+        	作者：offline
+        	时间：2017-02-15
+        	描述：管理员增加弹出层
+        -->
+        <div id="modal-admin" class="modal fade">
+        	<div class="modal-dialog modal-lg">
+        		<div class="modal-content">
+        			<div class="modal-header">
+        				<h4>新管理员</h4>
+        			</div>
+        			<div class="modal-body">
+        				<div class="container-fluid">
+							<div class="row">
+								<form id="modal-form-admin" action="#" class="form-horizontal">
+									<div class="form-group">
+										<label for="modal-form-admin-id" class="control-label col-lg-1">用户名</label>
+										<div class="col-lg-11">
+											<input id="modal-form-admin-id" name="modal-form-admin-id" class="form-control" type="text" placeholder="不超过10个中文字符">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="modal-form-admin-pwd" class="control-label col-lg-1">密码</label>
+										<div class="col-lg-11">
+											<input id="modal-form-admin-pwd" name="modal-form-admin-pwd" class="form-control" type="text" placeholder="不超过10个中文字符">
+										</div>
+									</div>									
+									<div class="form-group">
+										<label for="modal-form-admin-name" class="control-label col-lg-1">姓名</label>
+										<div class="col-lg-11">
+											<input id="modal-form-admin-name" name="modal-form-admin-name" class="form-control" type="text" placeholder="不超过10个中文字符">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="modal-form-admin-tel" class="control-label col-lg-1">手机号码</label>
+										<div class="col-lg-11">
+											<input id="modal-form-admin-tel" name="modal-form-admin-tel" class="form-control" type="text" placeholder="请输入11位手机号">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="modal-form-admin-sex" class="control-label col-lg-1">性别</label>
+										<div class="col-lg-11">
+											<select id="modal-form-admin-sex" name="modal-form-admin-sex" class="form-control selectpicker">
+												<option>男</option>
+												<option>女</option>
+											</select>
+										</div>
+									</div>									
+								</form>
+							</div>
+        				</div>
+        			</div>
+					<div class="modal-footer">
+						<button class="btn btn-success" onclick="newadmin()">注册</button>
+						<button class="btn btn-danger" data-dismiss="modal" onclick="cleanform()">取消</button>
+					</div>
+        		</div>
+        	</div>
+        </div>
 		<!--
         	作者：offline
         	时间：2016-12-09
@@ -123,16 +338,23 @@
 								<input id="username" name="username" type="text" class="form-control" placeholder="StudentID"/>
 								<input id="pwd" name="password" type="password" class="form-control" placeholder="password" />
 								<input type="button" id="loginbtn" class="btn btn-success navbar-btn" onclick="login()" value="Login"></input>
-								<input type="button" id="registbtn" class="btn btn-primary navbar-btn" onclick="regist()" value="Register"></input>
+								<input type="button" id="adminloginbtn" class="btn btn-primary navbar-btn" onclick="adminlogin()" value="adminLogin"></input>
 							</div>
 						</form>
 					</ul>
-					<ul id="pills" class="nav navbar-nav hidden">
-						<li class=""><a id="add" data-toggle="modal" data-target="#new"><span class="glyphicon glyphicon-plus"></span>新建活动</a></li>
-						<li id="flow" class="active"><a onclick="loadflow()">活动流</a></li>
-						<li id="my" class=""><a onclick="loadmy()">我发起的</a></li>
-						<li id="other" class=""><a onclick="loadother()">我参加的</a></li>
-						<form id="searchform" class="navbar-form navbar-left">
+					<ul id="pills" class="nav navbar-nav">
+						<li class="hidden"><a id="add" data-toggle="modal" data-target="#new"><span class="glyphicon glyphicon-plus"></span>新的活动</a></li>
+						<li class="hidden"><a id="addcourse" data-toggle="modal" data-target="#newcourse"><span class="glyphicon glyphicon-plus"></span>新的课程</a></li>
+						<li id="courseflow" class="hidden"><a onclick="loadCourse()">课程</a></li>
+						<li id="flow" class="active hidden"><a onclick="loadflow()">活动</a></li>
+						<li id="adminCourse" class="hidden"><a onclick="loadAdminCourse()">管理课程</a></li>
+						<li id="adminFlow" class="hidden"><a onclick="loadAdminFlow()">管理活动</a></li>
+						<li id="adminWait" class="hidden"><a onclick="loadAdminWait()">待审核活动</a></li>
+						<li id="adminWaitCourse" class="hidden"><a onclick="loadAdminWaitCourse()">待审核课程</a></li>
+						<li id="adminUser" class="hidden"><a onclick="loadAdminUser()">管理用户</a></li>
+						<li id="my" class="hidden"><a onclick="loadmy()">我的活动</a></li>
+						<li id="other" class="hidden"><a onclick="loadother()">参加的活动</a></li>
+						<form id="searchform" class="navbar-form navbar-left hidden">
 									<input name="searchcontent" type="text" id="searchcontent" class="form-control" placeholder="search" />
 									<input type="button" id="searchbtn" class="btn btn-primary" onclick="search()" value="搜索"></input>												
 						</form>
@@ -156,7 +378,7 @@
             </div>   
 		</div>
 	
-
+	
 	<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
 	<script type="text/javascript" src="dist/js/bootstrap.min.js" ></script>
 	<script type="text/javascript" src="login&regist.js"></script>
@@ -167,6 +389,10 @@
 	<script type="text/javascript" src="template.js" charset="UTF-8"></script>
 	<script type="text/javascript" src="addactivity.js" charset="UTF-8"></script>
 	<script type="text/javascript" src="search.js" ></script>
+	<script type="text/javascript" src="admin.js" ></script>
+	<script type="text/javascript" src="bootstrap-select.min.js"></script>
+	<script type="text/javascript" src="xlsx.core.min.js"></script>
+	<script type="text/javascript" src="tableExport.min.js"></script>
 	<script type="text/javascript" charset="UTF-8">
 	    $(".form_datetime").datetimepicker({
 	        format: "yyyy-mm-dd",
@@ -176,6 +402,28 @@
 	        todayBtn: true,
 	        pickerPosition: "bottom-left"
 	    });
+	    $("#activitytimestart").datetimepicker({
+	    	format: "hh:ii",
+	    	autoclose: true,
+	    	language: "zh-CN",
+	    	minView: "hour",
+	    	maxView: "day",
+	    	startView: "day",
+	    	pickerPosition: "bottom-left"
+	    })
+	    $("#activitytimeend").datetimepicker({
+	    	format: "hh:ii",
+	    	autoclose: true,
+	    	language: "zh-CN",
+	    	minView: "hour",
+	    	maxView: "day",
+	    	startView: "day",
+	    	pickerPosition: "bottom-left"
+	    })
+	    $('.selectpicker').selectpicker({
+  			style: 'btn-default',
+  			size: 4
+		});
 	</script>  
 	<script type="text/html" id="artemplate1">
 		<div class="panel panel-default">
@@ -200,7 +448,7 @@
 													<th>
 														时间
 													</th>
-													<th id="{{flowactivityid}}-date" class="flowdate">{{flowdate}}</th>
+													<th id="{{flowactivityid}}-date" class="flowdate">{{flowdate}} {{flowstart}}-{{flowend}}</th>
 												</tr>
 											</tbody>
 	            						</table>
@@ -265,7 +513,7 @@
 										<th>
 											时间
 										</th>
-										<th id="{{flowactivityid}}-date" class="flowdate">{{flowdate}}</th>
+										<th id="{{flowactivityid}}-date" class="flowdate">{{flowdate}} {{flowstart}}-{{flowend}}</th>
 									</tr>
 								</tbody>
     						</table>
@@ -283,6 +531,7 @@
     					
 	    				<div class="row">
 	    						<h3><a data-toggle="collapse" data-target="#{{flowactivityid}}-collaspe" class="panel-title" id="{{flowactivity}}-people">参与人     <span class="glyphicon glyphicon-list"></span></a></h3>
+	    						
 	    				</div>
     				</div>
     			</div>
@@ -291,6 +540,15 @@
     				<div class="container-fluid">
     					<table class="table table-hover">
     						<tbody id="{{flowactivityid}}-member">
+    							<tr>
+    								<button class="btn btn-block btn-primary" onclick="$('#{{flowactivityid}}-member').parent().tableExport({type:'csv', fileName:'{{flowactivity}}人员名单 '})">导出数据</button>
+    							</tr>
+								<tr>
+									<th>姓名</th>
+									<th>学号</th>
+									<th>手机号</th>
+									<th>性别</th>
+								</tr>
     						</tbody>
     					</table>
     				</div>
@@ -300,10 +558,276 @@
 	    </div>
 	   </div>
 	</script>
+	
 	<script type="text/html" id="artemplate3">
 		<tr>
-   			<th id="{{flowactivityid}}-{{count}}"></th>
+   			<th id="{{flowactivityid}}-studentname">{{membername}}</th>
+   			<th id="{{flowactivityid}}-studentid">{{memberid}}</th>
+   			<th id="{{flowactivityid}}-tel">{{membertel}}</th>
+   			<th id="{{flowactivityid}}-sex">{{membersex}}</th>
     	</tr>
+	</script>
+
+	<script type="text/html" id="artemplate4">
+		<div class="panel panel-default">
+	            		<div class="panel-heading">
+	            			<h3 id="{{flowactivityid}}-activity" class="panel-title">{{flowactivity}}</h3>
+	            		</div>
+	            		<div class="panel-body">
+	            			<div class="container-fluid">
+	            				<div class="row">
+	            					<div class="col-lg-5">
+	            						<table class="table-hover">
+											<tbody>
+												<tr>
+													<th>发起人</th>
+													<th id="{{flowactivityid}}-author" class="flowauthor">{{flowauthor}}</th>
+												</tr>
+												<tr>
+													<th>手机</th>
+													<th id="{{flowactivityid}}-tel" class="flowtel">{{flowtel}}</th>
+												</tr>
+												<tr>
+													<th>
+														时间
+													</th>
+													<th id="{{flowactivityid}}-date" class="flowdate">{{flowdate}} {{flowstart}}-{{flowend}}</th>
+												</tr>
+											</tbody>
+	            						</table>
+	            					</div>
+	            					<div class="col-lg-7">
+	            						<p id="{{flowactivityid}}-detail" class="flowdetail">{{flowdetail}}</p>
+	            						<p id="{{flowactivityid}}-id" class="hidden flowid">{{flowid}}</p>
+	            						
+	            					</div>
+	            				</div>            				            				
+	            			</div>	
+	            		</div>
+	            		<div class="panel-footer">
+	            			<div class="container-fluid">
+		            			<div class="row">
+		            				<div class="col-lg-5">
+		            					<h4 class="panel-title">参与人数</h4>
+            							<h3 id="{{flowactivityid}}-rate" style="color: #1ABC9C;">{{flowpeopleleft}}/{{flowpeople}}</h3>
+            							<label id="{{flowactivityid}}-people" class="hidden">{{flowpeople}}</label>
+            							<label id="{{flowactivityid}}-peopleleft" class="hidden">{{flowpeopleleft}}</label>
+            							
+		            				</div>
+		            				<div class="col-lg-5" style="padding-top: 30px;">
+		            					<div class="progress">
+		            						<div id="{{flowactivityid}}-bar" class="progress-bar-success" style="width: {{flowpeoplepercent}}%; transition: width 0.5s;">
+		            							{{flowpeoplepercent}}%
+		            						</div>
+		            					</div>
+		            					
+		            				</div>
+		            				<div class="col-lg-2">
+		            					<p class="hidden flowactivityid">{{flowactivityid}}</p>
+		            					<button id="{{flowactivityid}}" class="btn btn-danger btn-lg" style="margin-top: +20px;" onclick="removeactivity()"><span></span>关闭课程</button>
+		            				</div>
+	            				</div>
+	            			</div>	            			
+	            		</div>
+	            	</div>
+	</script>
+	
+	<script type="text/html" id="artemplate5">
+		<div class="panel panel-default">
+	            		<div class="panel-heading">
+	            			<h3 id="{{flowactivityid}}-activity" class="panel-title">{{flowactivity}}</h3>
+	            		</div>
+	            		<div class="panel-body">
+	            			<div class="container-fluid">
+	            				<div class="row">
+	            					<div class="col-lg-5">
+	            						<table class="table-hover">
+											<tbody>
+												<tr>
+													<th>发起人</th>
+													<th id="{{flowactivityid}}-author" class="flowauthor">{{flowauthor}}</th>
+												</tr>
+												<tr>
+													<th>手机</th>
+													<th id="{{flowactivityid}}-tel" class="flowtel">{{flowtel}}</th>
+												</tr>
+												<tr>
+													<th>
+														时间
+													</th>
+													<th id="{{flowactivityid}}-date" class="flowdate">{{flowdate}} {{flowstart}}-{{flowend}}</th>
+												</tr>
+											</tbody>
+	            						</table>
+	            					</div>
+	            					<div class="col-lg-7">
+	            						<p id="{{flowactivityid}}-detail" class="flowdetail">{{flowdetail}}</p>
+	            						<p id="{{flowactivityid}}-id" class="hidden flowid">{{flowid}}</p>
+	            						
+	            					</div>
+	            				</div>            				            				
+	            			</div>	
+	            		</div>
+	            		<div class="panel-footer">
+	            			<div class="container-fluid">
+		            			<div class="row">
+		            				<div class="col-lg-5">
+		            					<h4 class="panel-title">参与人数</h4>
+            							<h3 id="{{flowactivityid}}-rate" style="color: #1ABC9C;">{{flowpeople}}</h3>
+            							<label id="{{flowactivityid}}-people" class="hidden">{{flowpeople}}</label>
+            							<label id="{{flowactivityid}}-peopleleft" class="hidden">{{flowpeopleleft}}</label>
+            							
+		            				</div>
+		            				<div class="col-lg-2">
+		            					<p class="hidden flowactivityid">{{flowactivityid}}</p>
+		            					<button id="{{flowactivityid}}" class="btn btn-success btn-lg" style="margin-top: +20px;" onclick="approveactivity()"><span></span>通过审批</button>
+		            				</div>
+	            				</div>
+	            			</div>	            			
+	            		</div>
+	            	</div>
+	</script>
+
+	<script type="text/html" id="artemplate6">
+		<div class="panel panel-default">
+	            		<div class="panel-heading">
+	            			<h3 id="{{flowactivityid}}-activity" class="panel-title">{{flowactivity}}</h3>
+	            		</div>
+	            		<div class="panel-body">
+	            			<div class="container-fluid">
+	            				<div class="row">
+	            					<div class="col-lg-5">
+	            						<table class="table-hover">
+											<tbody>
+												<tr>
+													<th>发起人</th>
+													<th id="{{flowactivityid}}-author" class="flowauthor">{{flowauthor}}</th>
+												</tr>
+												<tr>
+													<th>手机</th>
+													<th id="{{flowactivityid}}-tel" class="flowtel">{{flowtel}}</th>
+												</tr>
+												<tr>
+													<th>
+														时间
+													</th>
+													<th id="{{flowactivityid}}-date" class="flowdate">{{flowdate}} {{flowstart}}-{{flowend}}</th>
+												</tr>
+											</tbody>
+	            						</table>
+	            					</div>
+	            					<div class="col-lg-7">
+	            						<p id="{{flowactivityid}}-detail" class="flowdetail">{{flowdetail}}</p>
+	            						<p id="{{flowactivityid}}-id" class="hidden flowid">{{flowid}}</p>
+	            						
+	            					</div>
+	            				</div>            				            				
+	            			</div>	
+	            		</div>
+	            		<div class="panel-footer">
+	            			<div class="container-fluid">
+		            			<div class="row">
+		            				<div class="col-lg-5">
+		            					<h4 class="panel-title">参与人数</h4>
+            							<h3 id="{{flowactivityid}}-rate" style="color: #1ABC9C;">{{flowpeople}}</h3>
+            							<label id="{{flowactivityid}}-people" class="hidden">{{flowpeople}}</label>
+            							<label id="{{flowactivityid}}-peopleleft" class="hidden">{{flowpeopleleft}}</label>
+            							
+		            				</div>
+		            				<div class="col-lg-2">
+		            					<p class="hidden flowactivityid">{{flowactivityid}}</p>
+		            					<button id="{{flowactivityid}}" class="btn btn-success btn-lg" style="margin-top: +20px;" onclick="approvecourse()"><span></span>通过审批</button>
+		            				</div>
+	            				</div>
+	            			</div>	            			
+	            		</div>
+	            	</div>
+	</script>
+	
+	<script type="text/html" id="artemplate7">
+		<div class="container-fluid">
+			<div class="row">
+				<button class="btn btn-block btn-success" data-toggle="modal" data-target="#modal-register">新用户</button>
+				<button class="btn btn-block btn-primary" data-toggle="modal" data-target="#modal-admin">增加管理员</button>
+				<ul class="nav nav-pills nav-justified">
+					<li><a id="adminAdmin" onclick="loadAdminAdmin()">管理管理员</a></li>
+					<li><a id="adminTeacher" onclick="loadAdminTeacher()">管理讲师</a></li>
+					<li><a id="adminStudent" onclick="loadAdminStudent()">管理学生</a></li>
+				</ul>
+			</div>
+			<div class="row">
+				<table class="table table-hover">
+					<tbody id="adminusertable">
+						<tr>
+							<th>ID</th>
+							<th>姓名</th>
+							<th>手机号</th>
+							<th>性别</th>
+							<th>类型</th>
+						</tr>
+					</tbody>
+				</table>				
+			</div>
+		</div>
+	</script>
+	
+	<script type="text/html" id="artemplate8">
+		<tr data-toggle="modal" data-target="#{{userid}}-modal">
+   			<th><a>{{userid}}</a></th>
+   			<th>{{username}}</th>
+   			<th>{{usertel}}</th>
+   			<th>{{usersex}}</th>
+   			<th>{{usertype}}</th>
+    	</tr>
+	</script>
+	
+	<script type="text/html" id="artemplate9">
+		<tr>
+			<th>ID</th>
+			<th>姓名</th>
+			<th>手机号</th>
+			<th>性别</th>
+			<th>类型</th>
+		</tr>
+	</script>
+	
+	<script type="text/html" id="artemplate10">
+		<tr>
+			<th>{{flowactivity}}</th>
+			<th>{{flowauthor}}</th>
+			<th>{{flowdate}}</th>
+			<th>{{flowstart}}-{{flowend}}</th>
+			<th><button id="{{flowactivityid}}-quit" class="btn btn-danger" onclick="quit('{{userid}}','{{flowactivityid}}')">删除</button></th>
+		</tr>
+	</script>
+	
+	<script type="text/html" id="artemplate11">
+		<div id="{{userid}}-modal" class="modal fade">
+    		<div class="modal-dialog modal-lg">
+    			<div class="modal-content">
+    				<div class="modal-header">
+						<h4>详细信息</h4>
+    				</div>
+    				<div class="modal-body">
+    				<table class="table table-hover">
+    					<tbody id="{{userid}}-list">
+    						<tr>
+    							<th>活动</th>
+    							<th>组织者</th>
+    							<th>日期</th>
+    							<th>时间</th>
+    							<th>操作</th>
+    						</tr>
+    					</tbody>
+    				</table>
+    				</div>
+    				<div class="modal-footer">
+    					<div class="col-lg-6"><button id="{{id}}-delete" class="btn btn-block btn-danger">删除用户</button></div>
+    					<div class="col-lg-6"><button class="btn btn-block btn-primary">强制Enroll</button></div>    					
+    				</div>
+    			</div>
+    		</div>
+    	</div>
 	</script>
 	</body>
 </html>

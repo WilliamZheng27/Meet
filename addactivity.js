@@ -5,23 +5,17 @@ addactivity = function(){
 	var currentbtn = event.target;
 	var activityid = event.target.id;
 	//alert(activityid);
-	var activity = $("#"+activityid+"-activity").text();
+	//var activity = $("#"+activityid+"-activity").text();
 	//alert(activity);
-	var author = $("#"+activityid+"-author").text();
-	var tel = $("#"+activityid+"-tel").text();
-	var activitydate = $("#"+activityid+"-date").text();
-	var detail = $("#"+activityid+"-detail").text();
+	//var author = $("#"+activityid+"-author").text();
+	//var tel = $("#"+activityid+"-tel").text();
+	//var activitydate = $("#"+activityid+"-date").text();
+	//var detail = $("#"+activityid+"-detail").text();
 	var authorid = $("#"+activityid+"-id").text();
 	
-	var transition = {"activity": activity,
-				 "author": author,
-				 "tel": tel,
-				 "activitydate": activitydate,
-				 "detail": detail, 
-				 "authorid": authorid,
-				 "id": id,
-				 "activityid": activityid
-		};
+	var transition = {"activityid": activityid,
+					  "id": id,
+					  "authorid": authorid};
 	var jsonStr = JSON.stringify(transition);
 	//alert(jsonStr);
 	$.ajax({

@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "zhengyuxiao12345";
-$database = "acti_db";
+$database = "user_db";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password);
@@ -13,24 +13,16 @@ if ($conn->connect_error) {
 } 
 mysqli_query($conn,'set names utf8');
 //echo "Connected successfully";
-$id = $_POST["activityid"];
-//echo $id;
+$str = $_POST["id"];
+$id = json_decode($str);
+//$id = "16337328";
 $sel = mysqli_select_db($conn,$database);
-$sql = "SELECT * FROM activity_".$id;
+$sql = "SELECT * FROM user".$id;
 $result = $conn->query($sql);
-mysqli_select_db($conn,"user_db");
 if ($result->num_rows > 0){
 	while($row = $result->fetch_assoc()){
-		$sql = "select * from users where username = "."\"".$row['userid']."\"";
-		//echo $row["userid"];
-		$result1 = $conn->query($sql);
-		if ($result1->num_rows > 0){
-			while($row1 = $result1->fetch_assoc()){
-				$row1["pwd"] = "";
-				echo json_encode($row1);
-				echo ",";
-			}
-		}			
+		echo json_encode($row);
+		echo ",";			
 	}
 }
 

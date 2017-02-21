@@ -13,15 +13,9 @@ if ($conn->connect_error) {
 } 
 mysqli_query($conn,'set names utf8');
 //echo "Connected successfully";
-$id = $_POST["activityid"];
 //echo $id;
-$sel = mysqli_select_db($conn,$database);
-$sql = "SELECT * FROM activity_".$id;
-$result = $conn->query($sql);
 mysqli_select_db($conn,"user_db");
-if ($result->num_rows > 0){
-	while($row = $result->fetch_assoc()){
-		$sql = "select * from users where username = "."\"".$row['userid']."\"";
+		$sql = "select * from users";
 		//echo $row["userid"];
 		$result1 = $conn->query($sql);
 		if ($result1->num_rows > 0){
@@ -31,8 +25,7 @@ if ($result->num_rows > 0){
 				echo ",";
 			}
 		}			
-	}
-}
+
 
 $conn -> close();
 ?>

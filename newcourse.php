@@ -16,7 +16,7 @@ $activity = $_POST["activity"];
 $author = $_POST["author"];
 $tel = $_POST["tel"];
 $people = $_POST["people"];
-$peopleleft = 1;
+$peopleleft = 0;
 $activitydate = $_POST["activitydate"];
 $detail = $_POST["detail"];
 $id = $_POST["userid"];
@@ -27,7 +27,7 @@ $activityid = uniqid();
 
 //echo $id;
 $sel = mysqli_select_db($conn,$database);
-$sql = "insert into wait values (\"".$activity."\", \"".$author."\", \"".$tel."\", \"".$activitydate."\", \"".$detail."\", \"".$id."\", \"".$people."\", \"".$peopleleft."\" ,\"".$activityid."\", \"".$start."\", \"".$end."\")";
+$sql = "insert into waitcourse values (\"".$activity."\", \"".$author."\", \"".$tel."\", \"".$activitydate."\", \"".$detail."\", \"".$id."\", \"".$people."\", \"".$peopleleft."\" ,\"".$activityid."\", \"".$start."\", \"".$end."\")";
 $result = $conn->query($sql);
 if (mysqli_affected_rows($conn) > 0){
 	$sql = "insert into user".$id." values (\"".$activity."\", \"".$author."\", \"".$tel."\", \"".$activitydate."\", \"".$detail."\", \"".$id."\", \"".$activityid."\", \"".$start."\", \"".$end."\")";
